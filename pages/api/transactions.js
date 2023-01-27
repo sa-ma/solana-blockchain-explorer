@@ -15,16 +15,16 @@ const handler = async (req, res) => {
     const queryAddress = req.query?.address;
     if (!queryAddress) {
         return res.status(401).json({
-            error: 'Invalid address',
+            message: 'Invalid address',
         });
     }
     try {
         const { accountBalance, transactionList } = await getAddressInfo(queryAddress);
         return res.status(200).json({ transactionList, accountBalance });
     } catch (error) {
-        console.log('Error:', error);
+        console.log(error);
         return res.status(500).json({
-            error: 'Server error',
+            message: 'Something went wrong. Please try again later',
         });
     }
 };
